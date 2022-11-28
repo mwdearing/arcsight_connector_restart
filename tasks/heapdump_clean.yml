@@ -1,0 +1,15 @@
+---
+- name: "Gather heapdump files for {{ connector }}."
+  find:
+    paths: "{{ connector_base }}/logs/"
+    recurse: false
+    use_regex: yes
+    patterns: 'Heap*'
+    file_type: file
+  register: files_to_delete
+
+- name: "Cleaning heapdumps for {{ connector }}."
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ files_to_delete.files }}"

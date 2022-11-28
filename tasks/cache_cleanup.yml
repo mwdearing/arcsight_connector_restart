@@ -1,0 +1,14 @@
+---
+- name: "Gather cache files older than {{ days_to_delete }} for {{ connector }}."
+  find:
+    paths: "{{ connector_base }}/user/agent/agentdata/"
+    recurse: false
+    file_type: file
+    age: "{{ days_to_delete }}"
+  register: files_to_delete
+
+- name: "Cleanup cache files older than {{ days_to_delete }} for {{ connector }}."
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ files_to_delete.files }}"

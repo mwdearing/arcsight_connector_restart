@@ -1,0 +1,13 @@
+- name: Getting connector information.
+  pause:
+    prompt: "Enter connector (E.g., connector_1)"
+    echo: yes
+  register: result
+
+- name: Declaring Variable
+  set_fact:
+    connector: "{{ result.user_input }}"
+
+- name: "Setting Variable to user input."
+  debug:
+    var: connector

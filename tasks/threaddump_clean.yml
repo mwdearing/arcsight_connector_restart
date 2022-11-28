@@ -1,0 +1,17 @@
+---
+- name: "Gather threaddump files for {{ connector }}."
+  find:
+    paths: "{{ connector_base }}/logs/"
+    recurse: false
+    use_regex: yes
+    patterns: 'Thread*'
+    file_type: file
+  register: files_to_delete
+  ignore_errors: true
+
+- name: "Cleaning threaddumps for {{ connector }}."
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ files_to_delete.files }}"
+  ignore_errors: true

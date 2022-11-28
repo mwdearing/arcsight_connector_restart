@@ -1,0 +1,7 @@
+---
+# defaults file for connector_restart
+connector: "connector_7"
+connector_base: "/opt/arcsight/connectors/{{ connector }}/current/"
+days_to_delete: "1d"
+service: "arc_{{ connector }}"
+appservice: "arc_appliance_{{ connector }}"

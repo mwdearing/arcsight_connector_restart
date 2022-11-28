@@ -1,0 +1,26 @@
+---
+
+- name: "Check if running on appliance or server for {{ connector }}."
+  stat:
+    path: "/opt/local/monit/"
+  register: connector_appliance
+
+- name: "Stop connector service for {{ connector }}."
+  service:
+    name: "{{ service }}"
+    state: stopped
+  when: not connector_appliance.stat.exists
+  
+
+- name: "Stop connector service on appliance for {{ connector }} (step 1/2)."
+  command: "/opt/local/monit/bin/monit stop {{ connector }}"
+  when: connector_appliance.stat.exists
+
+- name: "Stop connector service on appliance for {{ connector }} (step 2/2)."
+  command: "/etc/init.d/{{ appservice }} stop"
+  when: connector_appliance.stat.exists
+
+- name: "Waiting for service to stop for {{ connector }}."
+  wait_for:
+    path: "{{ connector_base }}/logs/agent.out.wrapper.log"
+    search_regex: Wrapper Stopped

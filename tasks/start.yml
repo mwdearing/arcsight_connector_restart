@@ -1,0 +1,21 @@
+---
+
+- name: Check if running on appliance or server.
+  stat:
+    path: "/opt/local/monit/"
+  register: connector_appliance
+
+- name: "Start connector service on appliance for {{ connector }}."
+  command: "/opt/local/monit/bin/monit start {{ connector }}"
+  when: connector_appliance.stat.exists
+
+- name: "Starting connector service for {{ connector }}."
+  service:
+    name: "{{ service }}"
+    state: started
+  when: not connector_appliance.stat.exists
+
+- name: "Waiting for service to start for {{ connector }}."
+  wait_for:
+    path: "{{ connector_base }}/run/agent.lock"
+    state: present
