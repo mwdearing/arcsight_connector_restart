@@ -1,0 +1,18 @@
+---
+  - hosts: arcmc_16, arcmc_15, arcmc_14
+    become: yes
+    tasks:
+      - name: Looping through connectors
+        include_role:
+          name: roles/connector_restart
+        vars:
+          connector: "{{ item }}"
+        with_items:
+          - "connector_1"
+          # - "connector_2"
+          # - "connector_3"
+          # - "connector_4"
+          # - "connector_5"
+          # - "connector_6"
+          # - "connector_7"
+          # - "connector_8"
