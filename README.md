@@ -2,7 +2,7 @@ CONNECTOR_RESTART
 =========
 Author: Michael Dearing
 
-A role to replace my container_restarter.sh script.
+A role to restart and cleanup ArcSight Smart Connectors when either deployed as a software instance or on an appliance with SSH access. 
 
 The role will prompt you for user-input so that the connector variable can be dynamic. You can also remove the below line and manually define the variable within your playbook. You can even define the variable with your playbook for looping. (See example.)
 > tasks/main.yml

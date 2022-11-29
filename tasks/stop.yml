@@ -10,7 +10,6 @@
     name: "{{ service }}"
     state: stopped
   when: not connector_appliance.stat.exists
-  
 
 - name: "Stop connector service on appliance for {{ connector }} (step 1/2)."
   command: "/opt/local/monit/bin/monit stop {{ connector }}"

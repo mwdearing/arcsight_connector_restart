@@ -1,0 +1,5 @@
+---
+- hosts: arcmc_16
+  become: yes
+  roles: 
+    - role: 'roles/connector_restart'
