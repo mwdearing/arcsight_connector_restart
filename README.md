@@ -15,6 +15,7 @@ Features
 - Verify service is fully stopped before executing.
 - Verify service is fully running before moving to the next connector. 
 - Remove cache files older than 1 day.
+- Remove old agent.properties.bak and agent.wrapper.conf.bak created by ArcMC
 - Remove Threaddump fles.
 - Remove Heapdump files.
 
