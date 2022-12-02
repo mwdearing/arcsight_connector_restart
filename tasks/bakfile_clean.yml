@@ -1,14 +1,14 @@
 ---
-  - name: "Finding old agent.lock for {{ connector }}."
+  - name: "Finding old *.bak files for {{ connector }}."
     find:
-      paths: "{{ connector_base }}/run/"
+      paths: "{{ connector_base }}/user/agent/"
       recurse: false
       use_regex: yes
-      patterns: "agent.lock"
+      patterns: "^*.bak$"
       file_type: file
     register: files_to_delete
 
-  - name: "Removing old agent.lock for {{ connector }}."
+  - name: "Removing old *.bak files for {{ connector }}."
     file:
       path: "{{ item.path }}"
       state: absent
