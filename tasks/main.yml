@@ -5,6 +5,7 @@
 - import_tasks: stop.yml
 - import_tasks: agentlock_clean.yml
 - import_tasks: cache_cleanup.yml
+- import_tasks: bakfile_cleanup.yml
 - import_tasks: threaddump_clean.yml
 - import_tasks: heapdump_clean.yml
 - import_tasks: start.yml
