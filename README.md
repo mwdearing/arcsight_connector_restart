@@ -4,10 +4,10 @@ Author: Michael Dearing
 
 A role to restart and cleanup ArcSight Smart Connectors when either deployed as a software instance or on an appliance with SSH access. 
 
-The role will prompt you for user-input so that the connector variable can be dynamic. You can also remove the below line and manually define the variable within your playbook. You can even define the variable with your playbook for looping. (See example.)
+The role uses the `connector` variable (from defaults or playbook vars) so connector targeting can be dynamic. If you want interactive input, uncomment the `set_connector.yml` import shown below. (See examples.)
 > tasks/main.yml
 >> ```yaml
->> - import_tasks: set_connector.yml
+>> # - import_tasks: set_connector.yml
 >> ```
 
 Features
@@ -16,7 +16,7 @@ Features
 - Verify service is fully running before moving to the next connector. 
 - Remove cache files older than 1 day.
 - Remove old agent.properties.bak and agent.wrapper.conf.bak created by ArcMC
-- Remove Threaddump fles.
+- Remove Threaddump files.
 - Remove Heapdump files.
 
 TODO
