@@ -3,8 +3,8 @@
     find:
       paths: "{{ connector_base }}/user/agent/"
       recurse: false
-      use_regex: yes
-      patterns: "^*.bak$"
+      use_regex: no
+      patterns: "*.bak"
       file_type: file
     register: files_to_delete
 
